@@ -1,0 +1,6 @@
+@wapi_HostAddress = http://localhost:5063
+
+GET {{wapi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
