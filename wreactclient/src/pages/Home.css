@@ -1,0 +1,10 @@
+.data-part {
+    display: flex;
+    justify-content: space-around;
+    background-color: wheat;
+}
+
+.article {
+    margin-bottom: 25px;
+    color: black;
+}
