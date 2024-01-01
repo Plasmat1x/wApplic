@@ -57,6 +57,10 @@ namespace wapi.Domain {
                 ent.HasData(new IdentityUserRole<string> {
                     RoleId = "087bb1c2-109b-427d-be77-e0799bf27af0",
                     UserId = "b97ed420-63cd-43cd-814f-2bee8c0f46d4"
+                },
+                new IdentityUserRole<string> {
+                    RoleId = "a061da55-fea2-4bb9-b5b9-e5d358587138",
+                    UserId = "b97ed420-63cd-43cd-814f-2bee8c0f46d4"
                 });
 
                 ent.HasData(new IdentityUserRole<string> {

@@ -4,10 +4,13 @@ import "./Articles.css";
 
 function Articles() {
     const [articles, setArticles] = useState();
+    const [user, setUser] = useState();
 
     useEffect(() => {
         getArticles();
     }, []);
+
+    useEffect(() => { getUser(articles.map((a) => a.id)) }, []);
 
     const contents = articles == undefined
         ? <p>Not loaded</p>
@@ -49,6 +52,12 @@ function Articles() {
         const response = await fetch('https://localhost:7000/api/Article/All', { mode: "cors" });
         const data = await response.json();
         setArticles(data);
+    }
+
+    async function getUser(id) {
+        const response = await fetch(`https://localhost:7000/api/User/${id}`, { mode: "cors" });
+        const data = await response.json();
+        setUser(data);
     }
 }
 
