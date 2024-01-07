@@ -1,0 +1,20 @@
+.article {
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(68, 110, 147);
+    padding: 1rem 2rem;
+    margin-bottom: 5px;
+}
+
+.data {
+    text-align: start;
+}
+
+.info {
+    display: flex;
+    justify-content: space-around;
+}
+
+hr {
+    margin: 5px 0px;
+}

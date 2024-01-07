@@ -1,0 +1,19 @@
+ul,
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+ul>li {
+    margin: 10px;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}

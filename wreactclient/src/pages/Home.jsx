@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import Time from "react-time-format";
-import "./Home.css";
+import { useLocation, Link } from "react-router-dom";
+import * as React from 'react';
+import "./Article.css"
+
 
 function Home() {
     const [articles, setArticles] = useState();
@@ -10,34 +12,25 @@ function Home() {
     }, []);
 
     const contents = articles == undefined
-        ? <p>Not loaded</p>
+        ?
+        <div>
+            <p>Not loaded</p>
+        </div>
         :
         <div>
             {articles.map((a) =>
                 <div className="article">
                     <h2>{a.title}</h2>
-                    <div>
-                        <p>{a.description}</p>
-                    </div>
-                    <div className="data-part">
-                        <div>
-                            <p>Aurhor:</p>
-                            <p>{a.authorId}</p>
-                        </div>
-                        <div>
-                            <p>Created at:</p>
-                            <p><Time value={a.createdAt} format="DD/MM/YYYY HH:mm" /></p>
-                        </div>
-                        <div>
-                            <p>Last updated:</p>
-                            <p><Time value={a.lastUpdatedAt} format="DD/MM/YYYY HH:mm" /></p>
-                        </div>
-                    </div>
-                    <hr></hr>
+                    <p>{a.description}</p>
+                    <Link to={{
+                        pathname: `article/${a.id}`,
+                        state: { id: a.id }
+                    }} >More
+                    </Link>
                 </div>
-
             )}
-        </div>
+        </div >
+
 
     return (
         <>
@@ -50,6 +43,19 @@ function Home() {
         const response = await fetch('https://localhost:7000/api/Article/All', { mode: "cors" });
         const data = await response.json();
         setArticles(data);
+    }
+
+    function getUser(id) {
+        const response = fetch(`https://localhost:7000/api/User/${id}`, {
+            mode: "cors",
+            method: "GET",
+            headers: {
+                'Content-Type': "application/json"
+            },
+            body: JSON.stringify(id)
+        });
+        const data = response.json();
+        return data.userName;
     }
 }
 
