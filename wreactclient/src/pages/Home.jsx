@@ -19,13 +19,14 @@ function Home() {
         :
         <div>
             {articles.map((a) =>
-                <div className="article">
+                <div key={a.id} className="article">
                     <h2>{a.title}</h2>
                     <p>{a.description}</p>
+                    <p>Author: {author(a.authorId)}</p>
                     <Link to={{
                         pathname: `article/${a.id}`,
                         state: { id: a.id }
-                    }} >More
+                    }}>More
                     </Link>
                 </div>
             )}
@@ -40,22 +41,18 @@ function Home() {
     );
 
     async function getArticles() {
-        const response = await fetch('https://localhost:7000/api/Article/All', { mode: "cors" });
-        const data = await response.json();
-        setArticles(data);
+        const response = await fetch('https://localhost:7000/api/Article/All', { mode: "cors" })
+            .then(r => r.json())
+            .then(d => setArticles(d));
     }
 
-    function getUser(id) {
-        const response = fetch(`https://localhost:7000/api/User/${id}`, {
-            mode: "cors",
-            method: "GET",
-            headers: {
-                'Content-Type': "application/json"
-            },
-            body: JSON.stringify(id)
-        });
-        const data = response.json();
-        return data.userName;
+    function author(id) {
+        var author = "";
+        fetch(`https://localhost:7000/api/user/${id}`, { mode: 'cors' })
+            .then(r => r.json())
+            .then(d => author = d.username);
+
+        return author;
     }
 }
 
